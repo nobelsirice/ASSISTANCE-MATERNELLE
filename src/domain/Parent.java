@@ -3,7 +3,8 @@ package domain;
 import java.time.LocalDate;
 
 public class Parent {
-	public int idParent = 0;
+	public static int compteur = 0;
+	public int idParent;
 	public String nom;
 	public String prenom;
 	public LocalDate dateNaiss;
@@ -17,7 +18,8 @@ public class Parent {
 	public Parent(String nom, String prenom, LocalDate dateNaiss, String metier, String adresse,
 			String mail, String telephone, String sexe) {
 		super();
-		idParent++;
+		compteur++;
+		idParent = compteur;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateNaiss = dateNaiss;

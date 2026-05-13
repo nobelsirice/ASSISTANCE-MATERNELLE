@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class SuiviJournalier {
-	public int idSuiviJournalier = 0;
+	public static int compteur = 0;
+	public int idSuiviJournalier;
 	public LocalDate dateArrive;
 	public LocalTime heureArrive;
 	public LocalDate dateDepart;
@@ -14,7 +15,8 @@ public class SuiviJournalier {
 	public SuiviJournalier(LocalDate dateArrive, LocalTime heureArrive, LocalDate dateDepart,
 			LocalTime heureDepart) {
 		super();
-		idSuiviJournalier++;
+		compteur++;
+		idSuiviJournalier = compteur;
 		this.dateArrive = dateArrive;
 		this.heureArrive = heureArrive;
 		this.dateDepart = dateDepart;
