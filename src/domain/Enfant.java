@@ -74,7 +74,4 @@ public class Enfant {
 		this.remarque = remarque;
 	}
 	
-	
-	
-	
 }
