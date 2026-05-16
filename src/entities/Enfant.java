@@ -1,87 +1,46 @@
-/**
- * 
- */
 package entities;
 
 import java.time.LocalDate;
 
-/**
- * 
- */
 public class Enfant {
-	
-	// Attributs 
-	private Long id;
-	private String nom;
-	private String prenom;
-	private LocalDate dateDeNaissance;
-	
-	// Un constructeur
-	public Enfant(String nom, String prenom, LocalDate date) {
-		this.nom = nom;
-		this.prenom = prenom;
-		this.dateDeNaissance = date;
-	}
 
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
+    // Attributs
+    private Long id;
+    private String nom;
+    private String prenom;
+    private LocalDate dateDeNaissance;
+    private char sexe;
+    private String remarque;
 
-	/**
-	 * @return the nom
-	 */
-	public String getNom() {
-		return nom;
-	}
+    // Constructeur
+    public Enfant(String nom, String prenom, LocalDate dateDeNaissance, char sexe) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateDeNaissance = dateDeNaissance;
+        this.sexe = sexe;
+        this.remarque = "";
+    }
 
-	/**
-	 * @return the prenom
-	 */
-	public String getPrenom() {
-		return prenom;
-	}
+    // Getters
+    public Long getId() { return id; }
+    public String getNom() { return nom; }
+    public String getPrenom() { return prenom; }
+    public LocalDate getDateDeNaissance() { return dateDeNaissance; }
+    public char getSexe() { return sexe; }
+    public String getRemarque() { return remarque; }
 
-	/**
-	 * @return the date
-	 */
-	public LocalDate getDateDeNaissance() {
-		return dateDeNaissance;
-	}
+    // Setters
+    public void setId(Long id) { this.id = id; }
+    public void setNom(String nom) { this.nom = nom; }
+    public void setPrenom(String prenom) { this.prenom = prenom; }
+    public void setDateDeNaissance(LocalDate dateDeNaissance) { this.dateDeNaissance = dateDeNaissance; }
+    public void setSexe(char sexe) { this.sexe = sexe; }
+    public void setRemarque(String remarque) { this.remarque = remarque; }
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @param nom the nom to set
-	 */
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	/**
-	 * @param prenom the prenom to set
-	 */
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-	/**
-	 * @param date the date to set
-	 */
-	public void setDateDeNaissance(LocalDate date) {
-		this.dateDeNaissance = date;
-	}
-	
-	// Un toString
-	public String toString() {
-		return id + " : " + nom + " " + prenom + " , née le : " + dateDeNaissance;
-				
-	}
+    // toString
+    @Override
+    public String toString() {
+        return "Enfant{id=" + id + ", nom='" + nom + "', prenom='" + prenom +
+               "', dateDeNaissance=" + dateDeNaissance + ", sexe=" + sexe + "}";
+    }
 }

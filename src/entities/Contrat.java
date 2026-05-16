@@ -1,145 +1,46 @@
-/**
- * 
- */
 package entities;
 
 import java.time.LocalDate;
 
-/**
- * 
- */
 public class Contrat {
-	
-	// Attributs 
-			private Long id;
-			private LocalDate dateDebut;
-			private LocalDate dateFin;
-			private double tauxHoraire;
-			private double duree;
-			private int repas;
-			
-			private Parent parent;
-			private Enfant enfant;
-			
-			// Un constructeur
-			public Contrat (LocalDate dateDebut, LocalDate dateFin, double tauxHoraire, double duree, int repas) {
-				this.dateDebut = dateDebut;
-				this.dateFin = dateFin;
-				this.tauxHoraire = tauxHoraire;
-				this.duree = duree;
-				this.repas = repas;
-			
-			}
 
-			/**
-			 * @return the id
-			 */
-			public Long getId() {
-				return id;
-			}
+    // Attributs
+    private Long id;
+    private LocalDate dateDebut;
+    private LocalDate dateFin;
+    private String typeContrat;
 
-			/**
-			 * @return the dateDebut
-			 */
-			public LocalDate getDateDebut() {
-				return dateDebut;
-			}
+    private Parent parent;
+    private Enfant enfant;
 
-			/**
-			 * @return the dateFin
-			 */
-			public LocalDate getDateFin() {
-				return dateFin;
-			}
+    // Constructeur
+    public Contrat(LocalDate dateDebut, LocalDate dateFin, String typeContrat) {
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.typeContrat = typeContrat;
+    }
 
-			/**
-			 * @return the tauxHoraire
-			 */
-			public double getTauxHoraire() {
-				return tauxHoraire;
-			}
+    // Getters
+    public Long getId() { return id; }
+    public LocalDate getDateDebut() { return dateDebut; }
+    public LocalDate getDateFin() { return dateFin; }
+    public String getTypeContrat() { return typeContrat; }
+    public Parent getParent() { return parent; }
+    public Enfant getEnfant() { return enfant; }
 
-			/**
-			 * @return the duree
-			 */
-			public double getDuree() {
-				return duree;
-			}
+    // Setters
+    public void setId(Long id) { this.id = id; }
+    public void setDateDebut(LocalDate dateDebut) { this.dateDebut = dateDebut; }
+    public void setDateFin(LocalDate dateFin) { this.dateFin = dateFin; }
+    public void setTypeContrat(String typeContrat) { this.typeContrat = typeContrat; }
+    public void setParent(Parent parent) { this.parent = parent; }
+    public void setEnfant(Enfant enfant) { this.enfant = enfant; }
 
-			/**
-			 * @return the repas
-			 */
-			public int getRepas() {
-				return repas;
-			}
-
-			/**
-			 * @param id the id to set
-			 */
-			public void setId(Long id) {
-				this.id = id;
-			}
-
-			/**
-			 * @param dateDebut the dateDebut to set
-			 */
-			public void setDateDebut(LocalDate dateDebut) {
-				this.dateDebut = dateDebut;
-			}
-
-			/**
-			 * @param dateFin the dateFin to set
-			 */
-			public void setDateFin(LocalDate dateFin) {
-				this.dateFin = dateFin;
-			}
-
-			/**
-			 * @param tauxHoraire the tauxHoraire to set
-			 */
-			public void setTauxHoraire(double tauxHoraire) {
-				this.tauxHoraire = tauxHoraire;
-			}
-
-			/**
-			 * @param duree the duree to set
-			 */
-			public void setDuree(double duree) {
-				this.duree = duree;
-			}
-
-			/**
-			 * @return the parent
-			 */
-			public Parent getParent() {
-				return parent;
-			}
-
-			/**
-			 * @return the enfant
-			 */
-			public Enfant getEnfant() {
-				return enfant;
-			}
-
-			/**
-			 * @param parent the parent to set
-			 */
-			public void setParent(Parent parent) {
-				this.parent = parent;
-			}
-
-			/**
-			 * @param enfant the enfant to set
-			 */
-			public void setEnfant(Enfant enfant) {
-				this.enfant = enfant;
-			}
-
-			/**
-			 * @param repas the repas to set
-			 */
-			public void setRepas(int repas) {
-				this.repas = repas;
-			}
+    // toString
+    @Override
+    public String toString() {
+        return "Contrat{id=" + id + ", type='" + typeContrat + "', du " + dateDebut +
+               " au " + dateFin + ", enfant=" + (enfant != null ? enfant.getNom() : "non défini") +
+               ", parent=" + (parent != null ? parent.getNom() : "non défini") + "}";
+    }
 }

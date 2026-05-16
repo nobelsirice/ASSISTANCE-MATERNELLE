@@ -1,195 +1,70 @@
-/**
- * 
- */
 package entities;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 
-/**
- * 
- */
 public class Parent {
-	
-	
-	// Attributs 
-		private Long id;
-		private char sexe;
-		private String nom;
-		private String prenom;
-		private LocalDate dateDeNaissance;
-		private String tel;
-		private String mail;
-		private String adresse;
-		
-		private HashSet<Enfant> listeEnfants;
-		
-		
-		// Un constructeur
-		public Parent (char sexe, String nom, String prenom, LocalDate date, String tel, String mail, String adresse) {
-			this.sexe = sexe;
-			this.nom = nom;
-			this.prenom = prenom;
-			this.dateDeNaissance = date;
-			this.tel = tel;
-			this.mail = mail;
-			this.adresse = adresse;
-			
-			this.listeEnfants = new HashSet<>();
-			
-		}
 
+    // Attributs
+    private Long id;
+    private String nom;
+    private String prenom;
+    private LocalDate dateNaiss;
+    private String metier;
+    private String adresse;
+    private String mail;
+    private String telephone;
+    private char sexe;
 
-		/**
-		 * @return the id
-		 */
-		public Long getId() {
-			return id;
-		}
+    private HashSet<Enfant> listeEnfants;
 
+    // Constructeur
+    public Parent(String nom, String prenom, LocalDate dateNaiss, String metier,
+                  String adresse, String mail, String telephone, char sexe) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNaiss = dateNaiss;
+        this.metier = metier;
+        this.adresse = adresse;
+        this.mail = mail;
+        this.telephone = telephone;
+        this.sexe = sexe;
+        this.listeEnfants = new HashSet<>();
+    }
 
-		/**
-		 * @return the sexe
-		 */
-		public char getSexe() {
-			return sexe;
-		}
+    // Getters
+    public Long getId() { return id; }
+    public String getNom() { return nom; }
+    public String getPrenom() { return prenom; }
+    public LocalDate getDateNaiss() { return dateNaiss; }
+    public String getMetier() { return metier; }
+    public String getAdresse() { return adresse; }
+    public String getMail() { return mail; }
+    public String getTelephone() { return telephone; }
+    public char getSexe() { return sexe; }
+    public HashSet<Enfant> getListeEnfants() { return listeEnfants; }
+    public int getNbEnfants() { return listeEnfants.size(); }
 
+    // Setters
+    public void setId(Long id) { this.id = id; }
+    public void setNom(String nom) { this.nom = nom; }
+    public void setPrenom(String prenom) { this.prenom = prenom; }
+    public void setDateNaiss(LocalDate dateNaiss) { this.dateNaiss = dateNaiss; }
+    public void setMetier(String metier) { this.metier = metier; }
+    public void setAdresse(String adresse) { this.adresse = adresse; }
+    public void setMail(String mail) { this.mail = mail; }
+    public void setTelephone(String telephone) { this.telephone = telephone; }
+    public void setSexe(char sexe) { this.sexe = sexe; }
 
-		/**
-		 * @return the nom
-		 */
-		public String getNom() {
-			return nom;
-		}
+    // Méthode ajouterEnfant
+    public void ajouterEnfant(Enfant enfant) {
+        this.listeEnfants.add(enfant);
+    }
 
-
-		/**
-		 * @return the prenom
-		 */
-		public String getPrenom() {
-			return prenom;
-		}
-
-
-		/**
-		 * @return the dateDeNaissance
-		 */
-		public LocalDate getDateDeNaissance() {
-			return dateDeNaissance;
-		}
-
-
-		/**
-		 * @return the tel
-		 */
-		public String getTel() {
-			return tel;
-		}
-
-
-		/**
-		 * @return the mail
-		 */
-		public String getMail() {
-			return mail;
-		}
-
-
-		/**
-		 * @return the adresse
-		 */
-		public String getAdresse() {
-			return adresse;
-		}
-
-		/**
-		 * @return the listeEnfants
-		 */
-		public HashSet<Enfant> getListeEnfants() {
-			return listeEnfants;
-		}
-
-
-		/**
-		 * @param id the id to set
-		 */
-		public void setId(Long id) {
-			this.id = id;
-		}
-
-
-		/**
-		 * @param sexe the sexe to set
-		 */
-		public void setSexe(char sexe) {
-			this.sexe = sexe;
-		}
-
-
-		/**
-		 * @param nom the nom to set
-		 */
-		public void setNom(String nom) {
-			this.nom = nom;
-		}
-
-
-		/**
-		 * @param prenom the prenom to set
-		 */
-		public void setPrenom(String prenom) {
-			this.prenom = prenom;
-		}
-
-
-		/**
-		 * @param dateDeNaissance the dateDeNaissance to set
-		 */
-		public void setDateDeNaissance(LocalDate dateDeNaissance) {
-			this.dateDeNaissance = dateDeNaissance;
-		}
-
-
-		/**
-		 * @param tel the tel to set
-		 */
-		public void setTel(String tel) {
-			this.tel = tel;
-		}
-
-
-		/**
-		 * @param mail the mail to set
-		 */
-		public void setMail(String mail) {
-			this.mail = mail;
-		}
-
-
-		/**
-		 * @param adresse the adresse to set
-		 */
-		public void setAdresse(String adresse) {
-			this.adresse = adresse;
-		}
-
-		// Fonctions
-		public void ajouterEnfant(Enfant enfant) {
-		    this.listeEnfants.add(enfant);
-		}
-		
-		public String toString() {
-			return sexe + " : " + nom + " " + prenom + " a " +  getNbreEnf();	
-		}
-
-
-		/**
-		 * @return the nbreEnf
-		 */
-		public int getNbreEnf() {
-			return listeEnfants.size();
-		}
-
-
+    // toString
+    @Override
+    public String toString() {
+        return "Parent{id=" + id + ", nom='" + nom + "', prenom='" + prenom +
+               "', telephone='" + telephone + "', nbEnfants=" + getNbEnfants() + "}";
+    }
 }
