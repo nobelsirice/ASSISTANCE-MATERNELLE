@@ -1,6 +1,11 @@
 package entities;
 
 import java.time.LocalDate;
+import state.EtatContrat;
+import state.ContratEnCours;
+import state.ContratResilie;
+import state.ContratSuspendu;
+import state.ContratTermine;
 
 public class Contrat {
 
@@ -9,6 +14,10 @@ public class Contrat {
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private String typeContrat;
+    
+    private EtatContrat etat;
+    
+    
 
     private Parent parent;
     private Enfant enfant;
@@ -18,6 +27,7 @@ public class Contrat {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.typeContrat = typeContrat;
+        this.etat = new ContratEnCours();
     }
 
     // Getters
@@ -43,4 +53,11 @@ public class Contrat {
                " au " + dateFin + ", enfant=" + (enfant != null ? enfant.getNom() : "non défini") +
                ", parent=" + (parent != null ? parent.getNom() : "non défini") + "}";
     }
+    
+ // Ajoute ces méthodes
+    public String getEtat() { return etat.getEtat(); }
+    public void activer() { etat.activer(); etat = new ContratEnCours(); }
+    public void suspendre() { etat.suspendre(); etat = new ContratSuspendu(); }
+    public void resilier() { etat.resilier(); etat = new ContratResilie(); }
+    public void terminer() { etat.terminer(); etat = new ContratTermine(); }
 }
