@@ -49,6 +49,8 @@ public class Parent {
     public char getSexe() { return sexe; }
     public HashSet<Enfant> getListeEnfants() { return listeEnfants; }
     public int getNbEnfants() { return listeEnfants.size(); }
+    public HashSet<Contrat> getListeContrat() { return listeContrat; }
+    public int getNbContrats() { return listeContrat.size(); }
 
     // Setters
     public void setId(Long id) { this.id = id; }
@@ -65,25 +67,28 @@ public class Parent {
     public void ajouterEnfant(Enfant enfant) {
         this.listeEnfants.add(enfant);
     }
-    
-    // afficher la liste des enfants 
-    
+
+    // Méthode ajouterContrat
+    public void ajouterContrat(Contrat contrat) {
+        this.listeContrat.add(contrat);
+    }
+
+    // afficher la liste des enfants
+
     public void afficherEnfant() {
     	for (Enfant e : this.listeEnfants) {
-   
+
     		System.out.println(e.getNom() +" " +e.getPrenom() +" sexe : "+e.getSexe()+" née le : "+e.getDateDeNaissance());
     	}
     }
-    
-// afficher la liste des contrats 
-    
+
+// afficher la liste des contrats
+
     public void afficherContrat() {
+    	int i = 1;
     	for (Contrat c : this.listeContrat) {
-    		int i = 1 ;
-    		System.out.print( " contrat "+i+" : ");
-    		c.toString();
+    		System.out.println(" contrat " + i + " : " + c.toString());
     		i++;
-    		
     	}
     }
     
