@@ -1,6 +1,9 @@
 package entities;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.HashSet;
+
 import state.EtatContrat;
 import state.ContratEnCours;
 import state.ContratResilie;
@@ -21,13 +24,24 @@ public class Contrat {
 
     private Parent parent;
     private Enfant enfant;
+    private HashSet <Contrat> listeContrat = new HashSet<>();
+
+    private static Long compteur = 0L;
 
     // Constructeur
     public Contrat(LocalDate dateDebut, LocalDate dateFin, String typeContrat) {
+    	compteur++;
+    	this.id = compteur;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.typeContrat = typeContrat;
         this.etat = new ContratEnCours();
+        
+    }
+    
+    // ajouter contrat
+    public void ajouterContrat() {
+    	listeContrat.add(null);
     }
 
     // Getters

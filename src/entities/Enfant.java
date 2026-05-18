@@ -11,9 +11,13 @@ public class Enfant {
     private LocalDate dateDeNaissance;
     private char sexe;
     private String remarque;
+    private static Long compteur = 0L;
+
 
     // Constructeur
     public Enfant(String nom, String prenom, LocalDate dateDeNaissance, char sexe) {
+    	compteur++;
+    	this.id = compteur;
         this.nom = nom;
         this.prenom = prenom;
         this.dateDeNaissance = dateDeNaissance;

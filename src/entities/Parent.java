@@ -17,11 +17,15 @@ public class Parent {
     private char sexe;
 
     private HashSet<Enfant> listeEnfants;
-
+    private HashSet<Contrat> listeContrat;
+    
+    private static Long compteur = 0L;
     // Constructeur
     public Parent(String nom, String prenom, LocalDate dateNaiss, String metier,
                   String adresse, String mail, String telephone, char sexe) {
-        this.nom = nom;
+        compteur++;
+    	this.id =  compteur;
+    	this.nom = nom;
         this.prenom = prenom;
         this.dateNaiss = dateNaiss;
         this.metier = metier;
@@ -30,6 +34,7 @@ public class Parent {
         this.telephone = telephone;
         this.sexe = sexe;
         this.listeEnfants = new HashSet<>();
+        this.listeContrat = new HashSet<>();
     }
 
     // Getters
@@ -60,7 +65,28 @@ public class Parent {
     public void ajouterEnfant(Enfant enfant) {
         this.listeEnfants.add(enfant);
     }
-
+    
+    // afficher la liste des enfants 
+    
+    public void afficherEnfant() {
+    	for (Enfant e : this.listeEnfants) {
+   
+    		System.out.println(e.getNom() +" " +e.getPrenom() +" sexe : "+e.getSexe()+" née le : "+e.getDateDeNaissance());
+    	}
+    }
+    
+// afficher la liste des contrats 
+    
+    public void afficherContrat() {
+    	for (Contrat c : this.listeContrat) {
+    		int i = 1 ;
+    		System.out.print( " contrat "+i+" : ");
+    		c.toString();
+    		i++;
+    		
+    	}
+    }
+    
     // toString
     @Override
     public String toString() {
