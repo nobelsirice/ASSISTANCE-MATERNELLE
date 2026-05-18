@@ -1,6 +1,7 @@
 package entities;
 
 import java.time.LocalDate;
+
 import state.EtatContrat;
 import state.ContratEnCours;
 import state.ContratResilie;
@@ -14,6 +15,8 @@ public class Contrat {
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private String typeContrat;
+    private Tarif tarif;
+    private Service service;
     
     private EtatContrat etat;
     
@@ -37,14 +40,18 @@ public class Contrat {
     public String getTypeContrat() { return typeContrat; }
     public Parent getParent() { return parent; }
     public Enfant getEnfant() { return enfant; }
+    public Tarif getTarif() { return tarif; }
+    public Service getService() { return service; }
 
-    // Setters
+	// Setters
     public void setId(Long id) { this.id = id; }
     public void setDateDebut(LocalDate dateDebut) { this.dateDebut = dateDebut; }
     public void setDateFin(LocalDate dateFin) { this.dateFin = dateFin; }
     public void setTypeContrat(String typeContrat) { this.typeContrat = typeContrat; }
     public void setParent(Parent parent) { this.parent = parent; }
     public void setEnfant(Enfant enfant) { this.enfant = enfant; }
+    public void setTarif(Tarif tarif) { this.tarif = tarif; }
+	public void setService(Service service) { this.service = service; }
 
     // toString
     @Override
