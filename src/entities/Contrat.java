@@ -1,7 +1,6 @@
 package entities;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.HashSet;
 
 import state.EtatContrat;
@@ -19,16 +18,15 @@ public class Contrat {
     private String typeContrat;
     private Tarif tarif;
     private Service service;
-    
+
     private EtatContrat etat;
-    
-    
 
     private Parent parent;
     private Enfant enfant;
-    private HashSet <Contrat> listeContrat = new HashSet<>();
 
+    /* ===== Gestion globale ===== */
     private static Long compteur = 0L;
+    public static HashSet<Contrat> listeContrat = new HashSet<>();
 
     // Constructeur
     public Contrat(LocalDate dateDebut, LocalDate dateFin, String typeContrat) {
@@ -38,12 +36,7 @@ public class Contrat {
         this.dateFin = dateFin;
         this.typeContrat = typeContrat;
         this.etat = new ContratEnCours();
-        
-    }
-    
-    // ajouter contrat
-    public void ajouterContrat() {
-    	listeContrat.add(null);
+        listeContrat.add(this);
     }
 
     // Getters
@@ -73,11 +66,43 @@ public class Contrat {
                " au " + dateFin + ", enfant=" + (enfant != null ? enfant.getNom() : "non défini") +
                ", parent=" + (parent != null ? parent.getNom() : "non défini") + "}";
     }
-    
- // Ajoute ces méthodes
+
+    /* ===== Méthodes liées au patron State ===== */
     public String getEtat() { return etat.getEtat(); }
     public void activer() { etat.activer(); etat = new ContratEnCours(); }
     public void suspendre() { etat.suspendre(); etat = new ContratSuspendu(); }
     public void resilier() { etat.resilier(); etat = new ContratResilie(); }
     public void terminer() { etat.terminer(); etat = new ContratTermine(); }
+
+
+    /* ===== Affichage de la liste globale ===== */
+
+    public static void afficherListeContrats() {
+        System.out.println("=== Liste de tous les contrats ===");
+
+        if (listeContrat.isEmpty()) {
+            System.out.println("Aucun contrat n'est enregistré pour le moment.");
+            return;
+        }
+
+        for (Contrat c : listeContrat) {
+            System.out.println("ID : " + c.id + " | " + c.toString() + " [état=" + c.getEtat() + "]");
+        }
+    }
+
+
+    /* ===== Recherche par ID ===== */
+
+    public static Contrat rechercherParId(long id) {
+
+        for (Contrat c : listeContrat) {
+            if (c.id != null && c.id == id) {
+                System.out.println("Contrat trouvé : id=" + c.id);
+                return c;
+            }
+        }
+
+        System.out.println("Le contrat avec l'ID " + id + " n'existe pas dans la liste.");
+        return null;
+    }
 }

@@ -1,14 +1,16 @@
 /**
- * 
+ *
  */
 package entities;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * 
+ *
  */
 public class Session {
 
@@ -22,7 +24,9 @@ public class Session {
 	private Enfant enfant;
 	private Contrat contrat;
 
+	/* ===== Gestion globale ===== */
 	private static Long compteur = 0L;
+	public static List<Session> listeSessions = new ArrayList<>();
 
 	// Constructeur
 	public Session(LocalDate dateArrive, LocalTime heureArrive, LocalDate dateDepart, LocalTime heureDepart) {
@@ -32,6 +36,8 @@ public class Session {
 		this.heureArrive = heureArrive;
 		this.dateDepart = dateDepart;
 		this.heureDepart = heureDepart;
+
+		listeSessions.add(this);
 	}
 
 	// Calcul de la durée en heures
@@ -104,5 +110,37 @@ public class Session {
 		return "Session{id=" + id + ", arrivee=" + dateArrive + " " + heureArrive + ", depart=" + dateDepart + " "
 				+ heureDepart + ", duree=" + calculerDuree() + "h" + ", enfant="
 				+ (enfant != null ? enfant.getNom() : "non défini") + "}";
+	}
+
+
+	/* ===== Affichage de la liste globale ===== */
+
+	public static void afficherListeSessions() {
+		System.out.println("=== Liste de toutes les sessions ===");
+
+		if (listeSessions.isEmpty()) {
+			System.out.println("Aucune session n'est enregistrée pour le moment.");
+			return;
+		}
+
+		for (Session s : listeSessions) {
+			System.out.println("ID : " + s.id + " | " + s.toString());
+		}
+	}
+
+
+	/* ===== Recherche par ID ===== */
+
+	public static Session rechercherParId(long id) {
+
+		for (Session s : listeSessions) {
+			if (s.id != null && s.id == id) {
+				System.out.println("Session trouvée : id=" + s.id);
+				return s;
+			}
+		}
+
+		System.out.println("La session avec l'ID " + id + " n'existe pas dans la liste.");
+		return null;
 	}
 }

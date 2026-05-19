@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import entities.AssistanteMaternelle;
+import entities.Assistante_maternelle;
 import entities.Contrat;
 import entities.Enfant;
 import entities.Parent;
@@ -14,18 +15,7 @@ import factory.ContratFactory;
 import service.RecapitulatifMensuel;
 import singleton.Configuration;
 
-/**
- * Facade qui regroupe toutes les opérations qu'une Assistante
- * maternelle peut effectuer dans l'application :
- * - consulter ses informations
- * - gérer ses contrats (création via la Factory, changement d'état via le State)
- * - gérer les sessions de garde et générer les récapitulatifs / statistiques
- *   (en déléguant à GardeFacade pour ne pas dupliquer le code)
- * - consulter et modifier la configuration globale (Singleton).
- *
- * Cette facade s'appuie sur GardeFacade (composition) afin de
- * réutiliser ce que la camarade a déjà implémenté sans y toucher.
- */
+
 public class FacadeAssistante {
 
 	private AssistanteMaternelle assistante;
@@ -111,7 +101,7 @@ public class FacadeAssistante {
 		return contrat.getEtat();
 	}
 
-	/* ----- Gestion des sessions de garde (délègue à GardeFacade) ----- */
+	/*  Gestion des sessions de garde  */
 
 	/**
 	 * Enregistrer une session de garde déjà construite(arrivée + départ d'un enfant)
@@ -120,8 +110,7 @@ public class FacadeAssistante {
 		gardeFacade.ajouterSession(session);
 	}
 
-	/**
-	 * Enregistrer une session de garde à partir des informations de facon directe
+	/*enregistrer une session de garde à partir des informations de facon directe
 	 */
 	public Session enregistrerSession(LocalDate dateArrive, LocalTime heureArrive,
 			LocalDate dateDepart, LocalTime heureDepart,
@@ -135,7 +124,7 @@ public class FacadeAssistante {
 
 	/*  Récapitulatif et statistiques  */
 
-	/** Clôturer le mois : déclenche la notification des abonnés (Observer). */
+	/* Cloturer le mois : déclenche la notification des abonnés (Observer). */
 	public void cloturerMois(int mois, int annee) {
 		gardeFacade.terminerMois(mois, annee);
 	}
@@ -171,8 +160,26 @@ public class FacadeAssistante {
 	public void modifierNbHeuresMax(double nbHeuresMax) {
 		Configuration.getInstance().setNbHeuresMax(nbHeuresMax);
 	}
-
 	
+	
+
+	/*liste de toutes les assistante*/
+	public void  listeAssistantes() {
+		entities.AssistanteMaternelle.afficherListeAssistantes();
+	}
+	
+	/* chercher assistante */ 
+	public AssistanteMaternelle rechercherParId(int id) {
+		AssistanteMaternelle a ;
+		a = entities.AssistanteMaternelle.rechercherParId(id);
+		if(a != null) {
+			System.out.println("-> Assistante  existante :  "+a.getNom());
+			return  a;
+		}else {
+			System.out.println("-> Assistante non existante ");
+			return null;
+		}
+	}  
 
 	public AssistanteMaternelle getAssistante() {
 		return assistante;

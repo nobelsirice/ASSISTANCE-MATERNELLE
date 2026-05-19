@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.HashSet;
+
 public class Service {
 	private Long idService;
 	private boolean hygiene;
@@ -12,12 +14,21 @@ public class Service {
     private double prixDouche;
     private double prixLecture;
     private double prixRepas;
-	
-	public Service() {}
-	
+
+	/* ===== Gestion globale ===== */
+	private static Long compteur = 0L;
+	public static HashSet<Service> listeServices = new HashSet<>();
+
+	public Service() {
+		compteur++;
+		this.idService = compteur;
+
+		listeServices.add(this);
+	}
+
 	public double CalculPrixTotal() {
 		double total = 0;
-		
+
 		if(hygiene)
 			total += prixHygiene;
 		if(activitePhysique)
@@ -28,7 +39,7 @@ public class Service {
 			total += prixLecture;
 		if(repas)
 			total += prixRepas;
-		
+
 		return total;
 	}
 
@@ -118,5 +129,48 @@ public class Service {
 
 	public void setPrixRepas(double prixRepas) {
 		this.prixRepas = prixRepas;
+	}
+
+	@Override
+	public String toString() {
+		return "Service{id=" + idService +
+				", hygiene=" + hygiene +
+				", activitePhysique=" + activitePhysique +
+				", douche=" + douche +
+				", lecture=" + lecture +
+				", repas=" + repas +
+				", total=" + CalculPrixTotal() + "€}";
+	}
+
+
+	/* ===== Affichage de la liste globale ===== */
+
+	public static void afficherListeServices() {
+		System.out.println("=== Liste de tous les services ===");
+
+		if (listeServices.isEmpty()) {
+			System.out.println("Aucun service n'est enregistré pour le moment.");
+			return;
+		}
+
+		for (Service s : listeServices) {
+			System.out.println("ID : " + s.idService + " | " + s.toString());
+		}
+	}
+
+
+	/* ===== Recherche par ID ===== */
+
+	public static Service rechercherParId(long id) {
+
+		for (Service s : listeServices) {
+			if (s.idService != null && s.idService == id) {
+				System.out.println("Service trouvé : id=" + s.idService);
+				return s;
+			}
+		}
+
+		System.out.println("Le service avec l'ID " + id + " n'existe pas dans la liste.");
+		return null;
 	}
 }
