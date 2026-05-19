@@ -17,11 +17,18 @@ public class Parent {
     private char sexe;
 
     private HashSet<Enfant> listeEnfants;
+    private HashSet<Contrat> listeContrat;
+
+    /* ===== Gestion globale ===== */
+    private static Long compteur = 0L;
+    public static HashSet<Parent> listeParents = new HashSet<>();
 
     // Constructeur
     public Parent(String nom, String prenom, LocalDate dateNaiss, String metier,
                   String adresse, String mail, String telephone, char sexe) {
-        this.nom = nom;
+        compteur++;
+    	this.id =  compteur;
+    	this.nom = nom;
         this.prenom = prenom;
         this.dateNaiss = dateNaiss;
         this.metier = metier;
@@ -30,6 +37,9 @@ public class Parent {
         this.telephone = telephone;
         this.sexe = sexe;
         this.listeEnfants = new HashSet<>();
+        this.listeContrat = new HashSet<>();
+
+        listeParents.add(this);
     }
 
     // Getters
@@ -44,6 +54,8 @@ public class Parent {
     public char getSexe() { return sexe; }
     public HashSet<Enfant> getListeEnfants() { return listeEnfants; }
     public int getNbEnfants() { return listeEnfants.size(); }
+    public HashSet<Contrat> getListeContrat() { return listeContrat; }
+    public int getNbContrats() { return listeContrat.size(); }
 
     // Setters
     public void setId(Long id) { this.id = id; }
@@ -63,10 +75,86 @@ public class Parent {
     
     
 
+    // Méthode ajouterContrat
+    public void ajouterContrat(Contrat contrat) {
+        this.listeContrat.add(contrat);
+    }
+
+    // afficher la liste des enfants
+
+    public void afficherEnfant() {
+    	for (Enfant e : this.listeEnfants) {
+
+    		System.out.println(e.getNom() +" " +e.getPrenom() +" sexe : "+e.getSexe()+" née le : "+e.getDateDeNaissance());
+    	}
+    }
+
+// afficher la liste des contrats
+
+    public void afficherContrat() {
+    	int i = 1;
+    	for (Contrat c : this.listeContrat) {
+    		System.out.println(" contrat " + i + " : " + c.toString() + " [état=" + c.getEtat() + "]");
+    		i++;
+    	}
+    }
+
     // toString
     @Override
     public String toString() {
         return "Parent{id=" + id + ", nom='" + nom + "', prenom='" + prenom +
                "', telephone='" + telephone + "', nbEnfants=" + getNbEnfants() + "}";
     }
+
+
+    /* ===== Affichage de la liste globale ===== */
+
+    public static void afficherListeParents() {
+        System.out.println("=== Liste de tous les parents ===");
+
+        if (listeParents.isEmpty()) {
+            System.out.println("Aucun parent n'est enregistré pour le moment.");
+            return;
+        }
+
+        for (Parent p : listeParents) {
+            System.out.println("ID : " + p.id +
+                    " | Nom : " + p.nom + " " + p.prenom +
+                    " | Téléphone : " + p.telephone +
+                    " | Mail : " + p.mail);
+        }
+    }
+
+
+    /* ===== Recherche par ID ===== */
+
+    public static Parent rechercherParId(long id) {
+
+        for (Parent p : listeParents) {
+            if (p.id != null && p.id == id) {
+                System.out.println("Parent trouvé : " + p.nom + " " + p.prenom);
+                return p;
+            }
+        }
+
+        System.out.println("Le parent avec l'ID " + id + " n'existe pas dans la liste.");
+        return null;
+    }
+    
+    public static Parent rechercherParId(int id) {
+
+        for (Parent p : listeParents) {
+            if (p.id == id) {
+                System.out.println("Parent trouvé : " + p.nom + " " + p.prenom);
+                return p;
+            }
+        }
+
+        System.out.println("le parent avec l'ID " + id + " n'existe pas dans la liste.");
+        return null;
+    }
+    
+    
+    /*	 Rechercher les contrats par id */
+    //public void chercherContratParId()
 }
