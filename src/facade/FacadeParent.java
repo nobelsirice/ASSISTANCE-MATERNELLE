@@ -16,6 +16,7 @@ public class FacadeParent {
 
 	private Parent parent;
 
+	/* Constructeur */
 	public FacadeParent(Parent parent) {
 		this.parent = parent;
 	}
@@ -90,9 +91,6 @@ public class FacadeParent {
 	/**
 	 * Obtenir le récapitulatif mensuel concernant les sessions de garde
 	 * des enfants de ce parent uniquement.
-	 *
-	 * On filtre la liste statique Session.listeSessions sur les contrats
-	 * du parent puis on délègue le calcul à ServiceRecapitulatif.
 	 */
 	public RecapitulatifMensuel obtenirRecapitulatif(int mois, int annee) {
 		List<Session> sessionsDuParent = new ArrayList<>();

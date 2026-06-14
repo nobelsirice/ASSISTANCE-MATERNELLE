@@ -20,7 +20,8 @@ public class FacadeAssistante {
 
 	private AssistanteMaternelle assistante;
 	private GardeFacade gardeFacade;
-
+	
+	/* Constructeur */
 	public FacadeAssistante(AssistanteMaternelle assistante) {
 		this.assistante = assistante;
 		this.gardeFacade = new GardeFacade(assistante);
@@ -44,9 +45,7 @@ public class FacadeAssistante {
 
 	/**
 	 * Créer un contrat pour un enfant donné et un parent donné,
-	 * puis l'ajouter à la liste des contrats de l'assistante.
-	 *
-	 * Délègue la construction à ContratFactory (patron Factory).
+	 * et l'ajouter à la liste des contrats de l'assistante.
 	 */
 	public Contrat creerContrat(LocalDate dateDebut, LocalDate dateFin, String typeContrat,
 			Enfant enfant, Parent parent, Tarif tarif, Service service) {
@@ -124,7 +123,7 @@ public class FacadeAssistante {
 
 	/*  Récapitulatif et statistiques  */
 
-	/* Cloturer le mois : déclenche la notification des abonnés (Observer). */
+	/* Cloturer le mois : déclenche la notification des abonnés (Observer) */
 	public void cloturerMois(int mois, int annee) {
 		gardeFacade.terminerMois(mois, annee);
 	}
